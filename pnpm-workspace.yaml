@@ -1,0 +1,13 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+
+syncInjectedDepsAfterScripts:
+  - build
+
+injectWorkspacePackages: true
+
+allowBuilds:
+  '@prisma/engines': true
+  esbuild: true
+  prisma: true
