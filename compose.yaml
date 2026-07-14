@@ -1,0 +1,20 @@
+services:
+  database:
+    image: dhi.io/postgres:18-alpine3.23-dev
+    restart: always
+    environment:
+      - POSTGRES_DB=oficina
+      - POSTGRES_USER=oficina_admin
+      - POSTGRES_PASSWORD=123456
+    ports:
+      - "5432:5432"
+    volumes:
+      - oficina-data:/var/lib/postgresql
+    networks:
+      - oficina-network
+
+volumes:
+  oficina-data:
+
+networks:
+  oficina-network:
