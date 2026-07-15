@@ -1,0 +1,50 @@
+generator client {
+  provider        = "prisma-client"
+  output          = "../src/generated/prisma"
+  previewFeatures = ["strictUndefinedChecks"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Status {
+  TO_DO
+  IN_PROGRESS
+  IN_REVIEW
+  FINISHED
+  CANCELED
+}
+
+model User {
+  id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name         String
+  email        String    @unique
+  passwordHash String
+  avatarUrl    String?
+  createdAt    DateTime  @default(now()) @db.Timestamptz(3)
+  updatedAt    DateTime  @updatedAt @db.Timestamptz(3)
+  projects     Project[]
+}
+
+model Client {
+  id        String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String
+  avatarUrl String?
+  createdAt DateTime  @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime  @updatedAt @db.Timestamptz(3)
+  projects  Project[]
+}
+
+model Project {
+  id        String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String
+  createdAt DateTime  @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime  @updatedAt @db.Timestamptz(3)
+  endDate   DateTime? @db.Timestamptz(3)
+  userId    String    @db.Uuid()
+  clientId  String?   @db.Uuid()
+  status    Status    @default(TO_DO)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  client    Client?   @relation(fields: [clientId], references: [id], onDelete: SetNull, onUpdate: NoAction)
+}
