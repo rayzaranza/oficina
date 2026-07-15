@@ -10,4 +10,5 @@ injectWorkspacePackages: true
 allowBuilds:
   '@prisma/engines': true
   esbuild: true
+  lefthook: true
   prisma: true
