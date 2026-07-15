@@ -8,6 +8,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/server.ts | pino-pretty",
+    "prisma-studio": "prisma studio",
     "build": "tsc",
     "start": "node dist/server.js"
   },
