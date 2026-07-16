@@ -7,6 +7,7 @@
     "build": "pnpm -r build",
     "start": "pnpm -r start",
     "dev": "pnpm -r dev",
+    "test": "vitest",
     "format-and-lint": "biome check .",
     "format-and-lint:fix": "biome check . --write"
   },
@@ -14,6 +15,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.5.3",
     "lefthook": "^2.1.10",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.10"
   }
 }
